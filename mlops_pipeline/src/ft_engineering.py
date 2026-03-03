@@ -144,7 +144,9 @@ class AutoPreprocessorToDF(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y=None):
         self.numeric_features_ = X.select_dtypes(include=["number"]).columns.tolist()
-        self.categorical_features_ = X.select_dtypes(exclude=["number"]).columns.tolist()
+        self.categorical_features_ = X.select_dtypes(
+            exclude=["number"]
+        ).columns.tolist()
 
         try:
             ohe = OneHotEncoder(handle_unknown="ignore", sparse_output=False)
@@ -167,14 +169,13 @@ class AutoPreprocessorToDF(BaseEstimator, TransformerMixin):
         return pd.DataFrame(Xt, columns=feature_names, index=X.index)
 
 
-
 COLUMNS_TO_DROP = [
     "fecha_prestamo",
     "tendencia_ingresos",
     "promedio_ingresos_datacredito",
 ]
 
-CATEGORY_COLUMNS = ["tipo_credito"] 
+CATEGORY_COLUMNS = ["tipo_credito"]
 
 OUTLIER_BOUNDS = {
     "edad_cliente": (18, 80),
@@ -204,6 +205,7 @@ pipeline_basemodel = Pipeline(
         ("derived_features", DerivedFeatures()),
     ]
 )
+
 
 # 3. Pipeline ML
 def make_pipeline_ml() -> Pipeline:
