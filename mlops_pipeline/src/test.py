@@ -5,7 +5,6 @@ from google.cloud import bigquery
 project_id = "pro-cientificos-acev"
 
 client = bigquery.Client(project=project_id)
-print("--------------------------------")
 sql = """
 SELECT * FROM `pro-cientificos-acev.financiero.scoring_creditos`
 """
@@ -17,7 +16,3 @@ print(df.columns.tolist())
 corr = df.corr(numeric_only=True)["Pago_atiempo"].sort_values(ascending=False)
 print("--------------------------------")
 print(corr) 
-
-print("--------------------------------")
-print("Tests OK")
-print("--------------------------------")
