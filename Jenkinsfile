@@ -19,28 +19,28 @@ pipeline {
         //     }
         // }
 
-        stage('Checkout') {
-            steps {
-                script {
-                    def extensions = (scm.extensions ?: []) + [
-                        [
-                            $class             : 'SubmoduleOption',
-                            disableSubmodules  : false,
-                            parentCredentials  : true,
-                            recursiveSubmodules: true,
-                            reference          : '',
-                            trackingSubmodules : false,
-                        ],
-                    ]
-                    checkout([
-                        $class           : 'GitSCM',
-                        branches         : scm.branches,
-                        extensions       : extensions,
-                        userRemoteConfigs: scm.userRemoteConfigs,
-                    ])
-                }
-            }
-        }
+        // stage('Checkout') {
+        //     steps {
+        //         script {
+        //             def extensions = (scm.extensions ?: []) + [
+        //                 [
+        //                     $class             : 'SubmoduleOption',
+        //                     disableSubmodules  : false,
+        //                     parentCredentials  : true,
+        //                     recursiveSubmodules: true,
+        //                     reference          : '',
+        //                     trackingSubmodules : false,
+        //                 ],
+        //             ]
+        //             checkout([
+        //                 $class           : 'GitSCM',
+        //                 branches         : scm.branches,
+        //                 extensions       : extensions,
+        //                 userRemoteConfigs: scm.userRemoteConfigs,
+        //             ])
+        //         }
+        //     }
+        // }
 
         // stage('Verify structure') {
         //     steps {
