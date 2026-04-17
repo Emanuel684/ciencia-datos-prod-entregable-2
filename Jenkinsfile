@@ -9,10 +9,16 @@ pipeline {
     // Polling when Jenkins is not reachable from GitHub (typical local Docker).
     // For instant builds on push/merge, configure GitHub webhook + Multibranch scan (see JENKINS.md).
     triggers {
-        pollSCM('H/15 * * * *')
+        pollSCM('H/1 * * * *')
     }
 
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
         // stage('Checkout') {
         //     steps {
         //         script {
@@ -60,19 +66,19 @@ pipeline {
 
         stage('Clonar repo') {
             steps {
-                git 'https://github.com/tu-usuario/tu-repo.git'
+                echo 'https://github.com/Emanuel684/ciencia-datos-prod-riesgo-crediticio.git'
             }
         }
 
         stage('Instalar dependencias') {
             steps {
-                sh 'npm install'  // o pip install -r requirements.txt
+                echo 'npm install'  // o pip install -r requirements.txt
             }
         }
 
         stage('Tests') {
             steps {
-                sh 'npm test'  // o pytest
+                echo 'npm test'  // o pytest
             }
         }
     }
