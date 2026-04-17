@@ -9,7 +9,7 @@ pipeline {
     // Polling when Jenkins is not reachable from GitHub (typical local Docker).
     // For instant builds on push/merge, configure GitHub webhook + Multibranch scan (see JENKINS.md).
     triggers {
-        pollSCM('H/15 * * * *')
+        pollSCM('H/1 * * * *')
     }
 
     stages {
