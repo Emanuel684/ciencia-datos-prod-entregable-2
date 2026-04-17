@@ -474,7 +474,21 @@ def run_monitoring_cycle(
     monitor_dir = Path(config.monitor_dir)
     monitor_dir.mkdir(parents=True, exist_ok=True)
 
-    df = pd.read_excel(config.data_path)
+    # df = pd.read_excel(config.data_path)
+    from google.cloud import bigquery
+    project_id = "pro-cientificos-acev"
+
+    client = bigquery.Client(project=project_id)
+
+    sql = """
+    SELECT * FROM `pro-cientificos-acev.financiero.scoring_creditos`
+    """
+
+    df = client.query(sql).to_dataframe()  # devuelve pandas.DataFrame
+    print(df.shape)
+    print(df.columns.tolist())
+
+
     x_raw, y = split_features_target(df, target_col=config.target_col)
     y = y.astype(int)
 
