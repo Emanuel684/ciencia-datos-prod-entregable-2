@@ -390,7 +390,20 @@ def train_and_select_model(
         >>> isinstance(res.summary_table, pd.DataFrame)
         True
     """
-    df = pd.read_excel(data_path)
+    # df = pd.read_excel(data_path)
+    from google.cloud import bigquery
+    project_id = "pro-cientificos-acev"
+
+    client = bigquery.Client(project=project_id)
+
+    sql = """
+    SELECT * FROM `pro-cientificos-acev.financiero.scoring_creditos`
+    """
+
+    df = client.query(sql).to_dataframe()  # devuelve pandas.DataFrame
+    print(df.shape)
+    print(df.columns.tolist())
+
     x_features_raw, y_target = split_features_target(df, target_col="Pago_atiempo")
     y_target = y_target.astype(int)
 
