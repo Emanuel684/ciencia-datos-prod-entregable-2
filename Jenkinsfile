@@ -57,13 +57,15 @@ URL: ${env.BUILD_URL}
 Console: ${env.BUILD_URL}console
 """
                 try {
-                    mail(
+                    // Email Extension Plugin: https://plugins.jenkins.io/email-ext/
+                    // Uses SMTP from Manage Jenkins → Configure System → Extended E-mail Notification
+                    emailext(
                         to: env.NOTIFY_EMAIL,
                         subject: "[Jenkins] ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${currentBuild.currentResult}",
                         body: body,
                     )
                 } catch (Throwable e) {
-                    echo "Could not send email (configure SMTP under Manage Jenkins → Configure System → E-mail Notification): ${e.message}"
+                    echo "Could not send email (configure SMTP in Extended E-mail Notification, not localhost:25): ${e.message}"
                 }
             }
         }
