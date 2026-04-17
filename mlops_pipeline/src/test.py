@@ -5,7 +5,7 @@ from google.cloud import bigquery
 project_id = "pro-cientificos-acev"
 
 client = bigquery.Client(project=project_id)
-print("--------------------------------")
+
 sql = """
 SELECT * FROM `pro-cientificos-acev.financiero.scoring_creditos`
 """
