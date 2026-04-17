@@ -60,19 +60,19 @@ pipeline {
 
         stage('Clonar repo') {
             steps {
-                git 'https://github.com/tu-usuario/tu-repo.git'
+                echo 'https://github.com/Emanuel684/ciencia-datos-prod-riesgo-crediticio.git'
             }
         }
 
         stage('Instalar dependencias') {
             steps {
-                sh 'npm install'  // o pip install -r requirements.txt
+                echo 'npm install'  // o pip install -r requirements.txt
             }
         }
 
         stage('Tests') {
             steps {
-                sh 'npm test'  // o pytest
+                echo 'npm test'  // o pytest
             }
         }
     }
