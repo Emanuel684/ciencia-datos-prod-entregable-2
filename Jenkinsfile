@@ -4,10 +4,7 @@ pipeline {
     options {
         skipDefaultCheckout(true)
         timestamps()
-    }
-
-    triggers {
-        pollSCM('H/15 * * * *')
+        disableConcurrentBuilds(abortPrevious: true)
     }
 
     environment {
