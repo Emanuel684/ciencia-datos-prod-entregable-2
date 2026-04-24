@@ -14,7 +14,6 @@ print(df.shape)
 print(df.columns.tolist())
 
 corr = df.corr(numeric_only=True)["Pago_atiempo"].sort_values(ascending=False)
-print("--------------------------------")
 print(corr) 
 
 print("--------------------------------")
